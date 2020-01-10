@@ -12,113 +12,110 @@ class SiteWide_Notice_WP_Settings{
 
   }
 
-   public function admin_init() {
-
-    }
-
-    public function admin_enqueue_scripts() {
+  public function admin_enqueue_scripts() {
     //enable color wheel
     wp_enqueue_style( 'wp-color-picker' );
     wp_enqueue_script( 'wp-color-alpha', plugins_url( '/js/wp-color-picker-alpha.min.js', __FILE__ ), array( 'wp-color-picker' ), '2.1.3', true );
   }
-    /**
-     * Adds menu link to WordPress Dashboard
-     * @since 1.0.0
-     * @return void
-     */
-    public function admin_menu() {
-        add_menu_page( 'Sitewide Notice', 'Sitewide Notice', 'manage_options', 'sitewide-notice-settings', array( $this, 'settings_page_content' ), 'dashicons-megaphone' );
+
+  /**
+   * Adds menu link to WordPress Dashboard
+   * @since 1.0.0
+   * @return void
+   */
+  public function admin_menu() {
+      add_menu_page( 'Sitewide Notice', 'Sitewide Notice', 'manage_options', 'sitewide-notice-settings', array( $this, 'settings_page_content' ), 'dashicons-megaphone' );
+
+  }
+
+  /**
+   * This is where all the settings are stored.
+   * @since 1.0.0
+   * @return void
+   */
+  public function settings_page_content() {
+
+    //check to see if swnza_options exist
+    $values = get_option( 'swnza_options' );
+
+    //default values
+    if( empty( $values ) ){
+
+      $values = array();
+
+      $values['active'] = '1';
+      $values['background_color'] = 'rgba(255,255,255,1)';
+      $values['font_color'] = 'rgba(0,0,0,1)';
+    $values['message'] = '';
+      $values['show_on_mobile'] = true;
+      $values['hide_for_logged_in'] = false;
+      $values['show_on_top'] = false;
+      if( defined( 'PMPRO_VERSION' ) ){
+        $values['show_for_members'] = false;
+      }
 
     }
 
-    /**
-     * This is where all the settings are stored.
-     * @since 1.0.0
-     * @return void
-     */
-    public function settings_page_content() {
+    //If they have submitted the form.
+    if( isset( $_POST['submit'] ) ) {
+      if( wp_verify_nonce($_POST['_nonce'], 'swnza_save_settings_nonce') ) {
 
-      //check to see if swnza_options exist
-      $values = get_option( 'swnza_options' );
+        if( isset( $_POST['active'] ) &&  $_POST['active'] === 'on' ){
+          $values['active'] = 1;
+        }else{
+          $values['active'] = 0;
+        }
 
-      //default values
-      if( empty( $values ) ){
+        if( isset( $_POST['show_on_mobile'] ) && $_POST['show_on_mobile'] === 'on' ){
+          $values['show_on_mobile'] = 1;
+        }else{
+          $values['show_on_mobile'] = 0;
+        }
 
-        $values = array();
+        if( isset( $_POST['hide_for_logged_in'] ) && $_POST['hide_for_logged_in'] === 'on' ){
+          $values['hide_for_logged_in'] = 1;
+        }else{
+          $values['hide_for_logged_in'] = 0;
+        }
 
-        $values['active'] = '1';
-        $values['background_color'] = 'rgba(255,255,255,1)';
-        $values['font_color'] = 'rgba(0,0,0,1)';
-      $values['message'] = '';
-        $values['show_on_mobile'] = true;
-        $values['hide_for_logged_in'] = false;
-        $values['show_on_top'] = false;
+        if( isset( $_POST['show_on_top'] ) && $_POST['show_on_top'] === 'on' ){
+          $values['show_on_top'] = 1;
+        }else{
+          $values['show_on_top'] = 0;
+        }
+
+        if( isset( $_POST['background-color'] ) ){
+          $values['background_color'] = $_POST['background-color'];
+        }
+
+        if( isset( $_POST['font-color'] ) ){
+          $values['font_color'] = $_POST['font-color'];
+        }
+
+        if( isset( $_POST['message'] ) ){
+          $values['message'] = htmlspecialchars( $_POST['message'] );
+        }
+
+        if( isset( $_POST['custom_css'] ) ){
+          $values['custom_css'] = htmlspecialchars( $_POST['custom_css'] );
+        }
+
+        // Check if PMPro exists, and update settings.
         if( defined( 'PMPRO_VERSION' ) ){
-          $values['show_for_members'] = false;
-        }
-
-      }
-
-      //If they have submitted the form.
-      if( isset( $_POST['submit'] ) ) {
-        if( wp_verify_nonce($_POST['_nonce'], 'swnza_save_settings_nonce') ) {
-
-          if( isset( $_POST['active'] ) &&  $_POST['active'] === 'on' ){
-            $values['active'] = 1;
+          if( isset( $_POST['show_for_members'] ) && $_POST['show_for_members'] === 'on' ){
+            $values['show_for_members'] = 1;
           }else{
-            $values['active'] = 0;
-          }
-
-          if( isset( $_POST['show_on_mobile'] ) && $_POST['show_on_mobile'] === 'on' ){
-            $values['show_on_mobile'] = 1;
-          }else{
-            $values['show_on_mobile'] = 0;
-          }
-
-          if( isset( $_POST['hide_for_logged_in'] ) && $_POST['hide_for_logged_in'] === 'on' ){
-            $values['hide_for_logged_in'] = 1;
-          }else{
-            $values['hide_for_logged_in'] = 0;
-          }
-
-          if( isset( $_POST['show_on_top'] ) && $_POST['show_on_top'] === 'on' ){
-            $values['show_on_top'] = 1;
-          }else{
-            $values['show_on_top'] = 0;
-          }
-
-          if( isset( $_POST['background-color'] ) ){
-            $values['background_color'] = $_POST['background-color'];
-          }
-
-          if( isset( $_POST['font-color'] ) ){
-            $values['font_color'] = $_POST['font-color'];
-          }
-
-          if( isset( $_POST['message'] ) ){
-            $values['message'] = htmlspecialchars( $_POST['message'] );
-          }
-
-          if( isset( $_POST['custom_css'] ) ){
-            $values['custom_css'] = htmlspecialchars( $_POST['custom_css'] );
-          }
-
-          // Check if PMPro exists, and update settings.
-          if( defined( 'PMPRO_VERSION' ) ){
-            if( isset( $_POST['show_for_members'] ) && $_POST['show_for_members'] === 'on' ){
-              $values['show_for_members'] = 1;
-            }else{
-              $values['show_for_members'] = 0;
-            }
-          }
-
-          //update the options stored in WordPress
-          if( update_option( 'swnza_options', $values ) ) {
-              SiteWide_Notice_WP_Settings::admin_notices_success();
+            $values['show_for_members'] = 0;
           }
         }
 
+        //update the options stored in WordPress
+        if( update_option( 'swnza_options', $values ) ) {
+            SiteWide_Notice_WP_Settings::admin_notices_success();
+        }
       }
+
+    }
 
       ?>
     <html>
