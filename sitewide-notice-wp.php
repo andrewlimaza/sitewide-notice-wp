@@ -3,7 +3,7 @@
  * Plugin Name: Sitewide Notice WP
  * Description: Adds a simple message bar to the front-end of your website.
  * Plugin URI: https://yoohooplugins.com
- * Version: 2.0.4
+ * Version: 2.1
  * Author: Yoohoo Plugins
  * Author URI: https://yoohooplugins.com
  * License: GPL2 or later
@@ -31,6 +31,7 @@ defined( 'ABSPATH' ) or exit;
  * INCLUDES
  */
 include 'sitewide-notice-settings.php'; //all admin code can be found in here.
+include 'includes/functions.php';
 
 class SiteWide_Notice_WP {
 
@@ -73,7 +74,6 @@ class SiteWide_Notice_WP {
     }
 
     public static function init() {
-
         if( isset( $_REQUEST['remove_swnza_settings'] ) || !empty( $_REQUEST['remove_swnza_settings'] ) ) {
             delete_option( 'swnza_options' );
         }
@@ -120,7 +120,7 @@ class SiteWide_Notice_WP {
                         position:fixed;
                         height:50px;
                         width:100%;
-                        background:<?php echo esc_attr( $swnza_options['background_color'] ); ?>;
+                        background:<?php echo sanitize_rgba_color( $swnza_options['background_color'] ); ?>;
                         padding-top:10px;
                         z-index:999;
                         display:block;
@@ -136,7 +136,7 @@ class SiteWide_Notice_WP {
                     <?php } ?>   
 
                     .swnza_banner p {
-                        color: <?php echo esc_attr( $swnza_options['font_color'] ); ?>;
+                        color: <?php echo sanitize_rgba_color( $swnza_options['font_color'] ); ?>;
                         text-align:center;
                         z-index:1000;
                         font-size:20px;
@@ -157,6 +157,10 @@ class SiteWide_Notice_WP {
 
                     .swnza_close_button:hover{
                         cursor: pointer;
+                    }
+
+                    #swnza_banner_text{
+                        margin-top:0;
                     }
 
                 <?php if( $swnza_options[ 'show_on_mobile' ] != 1 ) { ?>

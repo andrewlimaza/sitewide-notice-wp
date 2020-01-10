@@ -3,15 +3,14 @@ Contributors: andrewza, travislima, yoohooplugins
 Donate link: https://yoohooplugins.com
 Tags: sitewide banner, site banner, banner, notice, sitewide notice, popup banner, simple banner, website banner, website notice, site notice, site message, website message bar, website bar message, message bar
 Requires at least: 3.5
-Tested up to: 4.9
-Stable tag: trunk
+Tested up to: 5.0
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Simply add a small message bar to the bottom of each page of your website to display notice messages such as sales, notices and any text messages.
 
 == Description ==
-
 Simply add a small message bar to the bottom of each page of your website to display notice messages such as sales, notices and any text messages.
 
 A lightweight plugin that simply adds a small notification bar that allows you to insert simple text at the bottom of every page of your website as a call-to-action.
@@ -25,10 +24,10 @@ A lightweight plugin that simply adds a small notification bar that allows you t
 * When a user closes the bar, automatically hide this notification bar for 24 hours.
 * Show/hide notice bar with a checkbox.
 * HTML code supported.
-* Custom CSS supported.
-* Hide set wide message on mobile devices.
-* Hide site wide message for logged in users.
-* Integrates with [Paid Memberships Pro](https://paidmembershipspro.com) - show banner only to members.
+* Hide sitewide message on mobile devices.
+* Hide sitewide message for logged in users.
+* Integrates with [Paid Memberships Pro](https://paidmembershipspro.com) - show notification banner only to members.
+* Show notification bar either on top or on the bottom of the screen.
 
 == Installation ==
 
@@ -60,7 +59,7 @@ Yes, you are able to add code to Sitewide Notice WP
 
 = I need to add custom CSS to my banner =
 
-There is an allocated setting for Custom CSS
+You may add custom CSS to your WordPress Customizer. This is done by navigating to "Appearance" -> "Customize" -> "Additional CSS".
 
 = Should you have more questions =
 
@@ -68,12 +67,12 @@ Please feel free to contact us for any further questions.
 
 == Screenshots ==
 
-1. Sitewide Notice WP - front view of green bar and yellow text.
-2. Sitewide Notice WP - backend view for screenshot 1.
-3. Sitewide Notice WP - front view of black bar and white text.
-4. Sitewide Notice WP - backend view for screenshot 3.
+1. Sitewide Notice WP - front view of Sitewide Notice WP.
+2. Sitewide Notice WP - Sitewide Notice WP settings page.
 
 == Upgrade Notice ==
+= 2.0.4 =
+* Please upgrade to this version for a minor bug fix and improvements.
 
 = 2.0.3.2 =
 * Please upgrade to this version for a minor bug fix.
@@ -112,6 +111,11 @@ Please feel free to contact us for any further questions.
 * Please update your Sitewide Notice WP to the latest version to ensure the plugin runs correctly.
 
 == Changelog ==
+
+= 2.0.4 =
+* Enhancement: Changed close button icon. Uses SVG and supports retina-devices.
+* Enhancement: Option to show the notification bar on top or on the bottom of your site.
+* Bug Fix: Undefined index in some cases has now been fixed.
 
 = 2.0.3.2 =
 * Bug fix with the color picker library.
