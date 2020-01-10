@@ -12,55 +12,53 @@ class SiteWide_Notice_WP_Settings{
 
   }
 
-   public function admin_init() {
-
-    }
-
-    public function admin_enqueue_scripts() {
+  public function admin_enqueue_scripts() {
     //enable color wheel
     wp_enqueue_style( 'wp-color-picker' );
     wp_enqueue_script( 'wp-color-alpha', plugins_url( '/js/wp-color-picker-alpha.min.js', __FILE__ ), array( 'wp-color-picker' ), '2.1.3', true );
   }
-    /**
-     * Adds menu link to WordPress Dashboard
-     * @since 1.0.0
-     * @return void
-     */
-    public function admin_menu() {
-        add_menu_page( 'Sitewide Notice', 'Sitewide Notice', 'manage_options', 'sitewide-notice-settings', array( $this, 'settings_page_content' ), 'dashicons-megaphone' );
+
+  /**
+   * Adds menu link to WordPress Dashboard
+   * @since 1.0.0
+   * @return void
+   */
+  public function admin_menu() {
+      add_menu_page( 'Sitewide Notice', 'Sitewide Notice', 'manage_options', 'sitewide-notice-settings', array( $this, 'settings_page_content' ), 'dashicons-megaphone' );
+
+  }
+
+  /**
+   * This is where all the settings are stored.
+   * @since 1.0.0
+   * @return void
+   */
+  public function settings_page_content() {
+
+    //check to see if swnza_options exist
+    $values = get_option( 'swnza_options' );
+
+    //default values
+    if( empty( $values ) ){
+
+      $values = array();
+
+      $values['active'] = '1';
+      $values['background_color'] = 'rgba(255,255,255,1)';
+      $values['font_color'] = 'rgba(0,0,0,1)';
+    $values['message'] = '';
+      $values['show_on_mobile'] = true;
+      $values['hide_for_logged_in'] = false;
+      $values['show_on_top'] = false;
+      if( defined( 'PMPRO_VERSION' ) ){
+        $values['show_for_members'] = false;
+      }
 
     }
 
-    /**
-     * This is where all the settings are stored.
-     * @since 1.0.0
-     * @return void
-     */
-    public function settings_page_content() {
-
-      //check to see if swnza_options exist
-      $values = get_option( 'swnza_options' );
-
-      //default values
-      if( empty( $values ) ){
-
-        $values = array();
-
-        $values['active'] = '1';
-        $values['background_color'] = 'rgba(255,255,255,1)';
-        $values['font_color'] = 'rgba(0,0,0,1)';
-        $values['message'] = '';
-        $values['show_on_mobile'] = true;
-        $values['hide_for_logged_in'] = false;
-        $values['show_on_top'] = false;
-        if( defined( 'PMPRO_VERSION' ) ){
-          $values['show_for_members'] = false;
-        }
-
-      }
-
-      //If they have submitted the form.
-      if( isset( $_POST['submit'] ) ) {
+    //If they have submitted the form.
+    if( isset( $_POST['submit'] ) ) {
+      if( wp_verify_nonce($_POST['_nonce'], 'swnza_save_settings_nonce') ) {
 
         if( isset( $_POST['active'] ) &&  $_POST['active'] === 'on' ){
           $values['active'] = 1;
@@ -115,8 +113,9 @@ class SiteWide_Notice_WP_Settings{
         if( update_option( 'swnza_options', $values ) ) {
             SiteWide_Notice_WP_Settings::admin_notices_success();
         }
-
       }
+
+    }
 
       ?>
     <html>
@@ -177,7 +176,7 @@ class SiteWide_Notice_WP_Settings{
                  <label for="background-color"><?php _e( 'Background Color', 'sitewide-notice-wp' ); ?></label>
               </th>
               <td>
-                 <input type="text" name="background-color" class="color-picker" data-alpha="true" value="<?php echo $values['background_color']; ?>"/>
+                 <input type="text" name="background-color" class="color-picker" data-alpha="true" value="<?php echo sanitize_rgba_color( $values['background_color'] ); ?>"/>
               </td>
               </tr>
 
@@ -186,7 +185,7 @@ class SiteWide_Notice_WP_Settings{
                 <label for="font-color"><?php _e( 'Font Color', 'sitewide-notice-wp' ); ?></label>
               </th>
               <td>
-                <input type="text" name="font-color" class="color-picker" data-alpha="true" value="<?php echo $values['font_color']; ?>"/>
+                <input type="text" name="font-color" class="color-picker" data-alpha="true" value="<?php echo sanitize_rgba_color( $values['font_color'] ); ?>"/>
               </td>
               </tr>
 
@@ -195,11 +194,12 @@ class SiteWide_Notice_WP_Settings{
                 <label for="message" class="col-sm-2 control-label"><?php _e('Message:', 'sitewide-notice-wp'); ?> </label>
               </th>
               <td>
-                <textarea name="message" cols="40" rows="5" ><?php echo stripcslashes( $values['message'] ); ?></textarea>
+                <textarea name="message" cols="40" rows="5" ><?php echo stripcslashes( sanitize_text_field( $values['message'] ) ); ?></textarea>
               </td>
               </tr>
 
              <tr>
+             <input type="hidden" name="_nonce" value="<?php echo wp_create_nonce( 'swnza_save_settings_nonce' ); ?>">
               <th scope="row">
               <input type="submit" name="submit" class="button-primary" value="<?php _e( 'Save Settings', 'sitewide-notice-wp' ); ?>"/></th>
               </tr>
