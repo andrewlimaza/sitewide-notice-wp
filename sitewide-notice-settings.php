@@ -8,7 +8,11 @@ class SiteWide_Notice_WP_Settings{
   public function __construct() {
 
     add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-    add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+    
+    // Only load this script on our page.
+    if ( isset( $_REQUEST['page'] ) && $_REQUEST['page'] === 'sitewide-notice-settings' ) {
+      add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+    }
 
   }
 
