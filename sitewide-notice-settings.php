@@ -50,14 +50,14 @@ class SiteWide_Notice_WP_Settings{
       $values['active'] = '1';
       $values['background_color'] = 'rgba(255,255,255,1)';
       $values['font_color'] = 'rgba(0,0,0,1)';
-    $values['message'] = '';
+      $values['message'] = '';
       $values['show_on_mobile'] = true;
       $values['hide_for_logged_in'] = false;
       $values['show_on_top'] = false;
       if( defined( 'PMPRO_VERSION' ) ){
         $values['show_for_members'] = false;
       }
-
+      $values['dismissible'] = '1';
     }
 
     //If they have submitted the form.
@@ -100,8 +100,10 @@ class SiteWide_Notice_WP_Settings{
           $values['message'] = htmlspecialchars( $_POST['message'] );
         }
 
-        if( isset( $_POST['custom_css'] ) ){
-          $values['custom_css'] = htmlspecialchars( $_POST['custom_css'] );
+        if( isset( $_POST['dismissible'] ) && $_POST['dismissible'] === 'on' ){
+          $values['dismissible'] = 1;
+        }else{
+          $values['dismissible'] = 0;
         }
 
         // Check if PMPro exists, and update settings.
@@ -145,6 +147,13 @@ class SiteWide_Notice_WP_Settings{
                 <td>
                    <input type="checkbox" name="show_on_mobile" <?php if( isset( $values['show_on_mobile'] ) && ! empty( $values['show_on_mobile'] ) ){ echo 'checked'; } ?> />
                 </td>
+              </tr>
+
+              <tr>
+                <th scope="row">
+                  <label for="dismissible"><?php _e( 'Show Close Button For Banner', 'sitewide-notice-wp' ); ?></label>
+                </th>
+                <td><input type="checkbox" name="dismissible" <?php if( isset( $values['dismissible'] ) && ! empty( $values['dismissible'] ) ) { echo 'checked'; } ?>/></td>
               </tr>
 
               <tr>

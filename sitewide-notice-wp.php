@@ -91,28 +91,32 @@ class SiteWide_Notice_WP {
             return;
         }
 
-        if( $swnza_options[ 'active' ] ) {
+        if( apply_filters( 'swnza_show_banner', true ) && $swnza_options[ 'active' ] ) {
 
             // If show for PMPro members setting is enabled and user doesn't have membership level, return.
             if( isset( $swnza_options['show_for_members'] ) && ! empty( $swnza_options['show_for_members'] ) && !pmpro_hasMembershipLevel() ) {
                 return;
             } ?>
 
-            <!-- SiteWide Notice WP Cookies -->
-            <script type="text/javascript">
-            jQuery(document).ready(function($){
+            <?php if ( ! empty( $swnza_options['dismissible'] ) ) { ?>
+                <!-- SiteWide Notice WP Cookies -->
+                <script type="text/javascript">
+                    jQuery(document).ready(function($){
 
-                if( Cookies.get('swnza_hide_banner_cookie') != undefined ) {
-                    $('.swnza_banner').hide();
-                }
+                        if( Cookies.get('swnza_hide_banner_cookie') != undefined ) {
+                            $('.swnza_banner').hide();
+                        }
 
-                $('#swnza_close_button_link').click(function(){
-                  Cookies.set('swnza_hide_banner_cookie', 1, { expires: 1, path: '/' }); //expire the cookie after 24 hours.
+                        $('#swnza_close_button_link').click(function(){
+                        Cookies.set('swnza_hide_banner_cookie', 1, { expires: 1, path: '/' }); //expire the cookie after 24 hours.
 
-                  $('.swnza_banner').hide();
-                });
-            });
-            </script>
+                        $('.swnza_banner').hide();
+                        });
+                    });
+                </script>
+            <?php }?>
+
+          
 
             <!-- SiteWide Notice WP Custom CSS -->
                 <style type="text/css">
@@ -145,6 +149,7 @@ class SiteWide_Notice_WP {
                         margin: 0;
                     }
 
+                    <?php if ( ! empty( $swnza_options['dismissible'] ) ) { ?>
                     .swnza_close_button{
                         display:block;
                         position:absolute;
@@ -161,6 +166,8 @@ class SiteWide_Notice_WP {
                         cursor: pointer;
                     }
 
+                <?php } ?>
+
                     #swnza_banner_text{
                         margin-top:0;
                     }
@@ -175,13 +182,11 @@ class SiteWide_Notice_WP {
                 </style>
                 <?php } ?>
 
-        <div class="swnza_banner" id="swnza_banner_id">
-        <p id="swnza_banner_text"><?php echo htmlspecialchars_decode( stripslashes( $swnza_options['message'] ) ); ?></p>
-        <a id="swnza_close_button_link" class="swnza_close_button"></a>
-        </div>
-
-    <?php
-    }
+                <div class="swnza_banner" id="swnza_banner_id">
+                <p id="swnza_banner_text"><?php echo htmlspecialchars_decode( stripslashes( $swnza_options['message'] ) ); ?></p>
+                <a id="swnza_close_button_link" class="swnza_close_button"></a>
+                </div>
+        <?php }
 } //end of class
 
 Sitewide_Notice_WP::get_instance();
