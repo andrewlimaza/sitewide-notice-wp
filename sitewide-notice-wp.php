@@ -118,7 +118,8 @@ class SiteWide_Notice_WP {
                 <style type="text/css">
                     .swnza_banner{
                         position:fixed;
-                        height:50px;
+                        min-height:50px;
+                        height:auto;
                         width:100%;
                         background:<?php echo sanitize_rgba_color( $swnza_options['background_color'] ); ?>;
                         padding-top:10px;
@@ -141,6 +142,7 @@ class SiteWide_Notice_WP {
                         z-index:1000;
                         font-size:20px;
                         display:block;
+                        margin: 0;
                     }
 
                     .swnza_close_button{
