@@ -3,7 +3,7 @@
  * Plugin Name: Sitewide Notice WP
  * Description: Adds a simple message bar to the front-end of your website.
  * Plugin URI: https://yoohooplugins.com
- * Version: 2.1
+ * Version: 2.2
  * Author: Yoohoo Plugins
  * Author URI: https://yoohooplugins.com
  * License: GPL2 or later

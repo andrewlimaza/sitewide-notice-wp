@@ -4,7 +4,7 @@ Donate link: https://yoohooplugins.com
 Tags: sitewide banner, site banner, banner, notice, sitewide notice, popup banner, simple banner, website banner, website notice, site notice, site message, website message bar, website bar message, message bar
 Requires at least: 4.0
 Tested up to: 5.3.2
-Stable tag: 2.0.4
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,9 @@ Please feel free to contact us for any further questions.
 2. Sitewide Notice WP - Sitewide Notice WP settings page.
 
 == Upgrade Notice ==
+= 2.2 =
+* Please upgrade for new features and general improvements.
+
 = 2.1 =
 * Please upgrade to version 2.1 for security and UI improvements.
 
@@ -114,9 +117,15 @@ Please feel free to contact us for any further questions.
 * Please update your Sitewide Notice WP to the latest version to ensure the plugin runs correctly.
 
 == Changelog ==
+= 2.2 =
+* Bug Fix: Support TwentyTwenty theme. Fixed an issue where loading the wp-alpha-color.js was causing issues.
+* Enhancement: Added option to hide close button.
+* Enhancement: Added filter `swnza_show_banner` as an override to show/hide the bar.
+* Enhancement: General styling improvements to the bar to fit things better.
+
 = 2.1 =
-* SECURITY: Added in nonces and escaped values when saving.
-* ENHANCEMENT: Improved UI of text of banner on front-end.
+* Security: Added in nonces and escaped values when saving.
+* Enhancement: Improved UI of text of banner on front-end.
 
 = 2.0.4 =
 * Enhancement: Changed close button icon. Uses SVG and supports retina-devices.
