@@ -67,7 +67,7 @@ class SiteWide_Notice_WP {
 
         $swnza_options = get_option( 'swnza_options' );
 
-        if( $swnza_options['active'] && !is_admin() && ( $pagenow !== 'wp-login.php' ) ) {
+        if ( ( is_array( $swnza_options ) && $swnza_options['active'] ) && !is_admin() && ( $pagenow !== 'wp-login.php' ) ) {
             add_action( 'wp_footer', array( 'SiteWide_Notice_WP', 'display_sitewide_notice_banner' ) );
             add_action( 'wp_enqueue_scripts', array( 'SiteWide_Notice_WP', 'enqueue_scripts' ) );
         }
