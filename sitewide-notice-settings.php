@@ -207,7 +207,7 @@ class SiteWide_Notice_WP_Settings{
                 <label for="message" class="col-sm-2 control-label"><?php _e('Message:', 'sitewide-notice-wp'); ?> </label>
               </th>
               <td>
-                <textarea name="message" cols="40" rows="5" ><?php echo stripcslashes( sanitize_text_field( $values['message'] ) ); ?></textarea>
+                <textarea name="message" cols="40" rows="5" ><?php echo stripcslashes( sanitize_text_field( apply_filters( 'swnza_banner_text', $values['message'] ) ) ); ?></textarea>
               </td>
               </tr>
 
