@@ -183,7 +183,7 @@ class SiteWide_Notice_WP {
                 <?php } ?>
 
                 <div class="swnza_banner" id="swnza_banner_id">
-                <p id="swnza_banner_text"><?php echo htmlspecialchars_decode( stripslashes( $swnza_options['message'] ) ); ?></p>
+                <p id="swnza_banner_text"><?php echo htmlspecialchars_decode( stripslashes( apply_filters( 'swnza_banner_text', $swnza_options['message'] ) ) ); ?></p>
                 <a id="swnza_close_button_link" class="swnza_close_button"></a>
                 </div>
         <?php }
