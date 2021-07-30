@@ -97,7 +97,16 @@ class SiteWide_Notice_WP_Settings{
         }
 
         if( isset( $_POST['message'] ) ){
-          $values['message'] = htmlspecialchars( $_POST['message'] );
+          $values['message'] = htmlspecialchars( wp_kses( $_POST['message'], apply_filters( 'sitewidenotice_message_kses', array(
+              'a' => array(
+                  'href' => array(),
+                  'title' => array()
+              ),
+              'br' => array(),
+              'em' => array(),
+              'strong' => array(),
+              'p' => array()
+          ) ) ) );
         }
 
         if( isset( $_POST['dismissible'] ) && $_POST['dismissible'] === 'on' ){
