@@ -97,7 +97,7 @@ class SiteWide_Notice_WP_Settings{
         }
 
         if( isset( $_POST['message'] ) ){
-          $values['message'] = htmlspecialchars( wp_kses( $_POST['message'], apply_filters( 'sitewidenotice_message_kses', array(
+          $values['message'] = htmlspecialchars( wp_kses( $_POST['message'], apply_filters( 'swnza_message_kses', array(
               'a' => array(
                   'href' => array(),
                   'title' => array()

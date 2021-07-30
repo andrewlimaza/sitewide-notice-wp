@@ -2,9 +2,9 @@
 Contributors: andrewza, travislima, yoohooplugins
 Donate link: https://yoohooplugins.com
 Tags: sitewide banner, site banner, banner, notice, sitewide notice, popup banner, simple banner, website banner, website notice, site notice, site message, website message bar, website bar message, message bar
-Requires at least: 4.0
-Tested up to: 5.3.2
-Stable tag: 2.1
+Requires at least: 4.5
+Tested up to: 5.8
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,17 +30,12 @@ A lightweight plugin that simply adds a small notification bar that allows you t
 * Show notification bar either on top or on the bottom of the screen.
 
 == Installation ==
-
-
 1. Upload the plugin files to the `/wp-content/plugins/sitewide-notice-wp` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Use the 'Sitewide Notice' link on the dashboard screen to configure the plugin.
 4. Toggle 'Plugin Enable/Disable' to display the notice bar.
 
-
-
 == Frequently Asked Questions ==
-
 = Is this plugin free? =
 
 Yes this plugin is totally free! You may donate to our development via Paypal which is found inside the Sitewide Notice page in the dashboard.
@@ -66,11 +61,13 @@ You may add custom CSS to your WordPress Customizer. This is done by navigating 
 Please feel free to contact us for any further questions.
 
 == Screenshots ==
-
 1. Sitewide Notice WP - front view of Sitewide Notice WP.
 2. Sitewide Notice WP - Sitewide Notice WP settings page.
 
 == Upgrade Notice ==
+= 2.3 =
+* Upgrade immediately for SECURITY improvements.
+
 = 2.2 =
 * Please upgrade for new features and general improvements.
 
@@ -117,6 +114,11 @@ Please feel free to contact us for any further questions.
 * Please update your Sitewide Notice WP to the latest version to ensure the plugin runs correctly.
 
 == Changelog ==
+= 2.3 =
+* Security: Fixed a potential XSS issue. Added wp_kses to banner message options.
+* Enhancement: Added in filter for frontend banner text `swnza_banner_text`.
+* Enhancement: Added in filter for allowed HTML in the banner message options `swnza_message_kses`.
+
 = 2.2 =
 * Bug Fix: Support TwentyTwenty theme. Fixed an issue where loading the wp-alpha-color.js was causing issues.
 * Enhancement: Added option to hide close button.
@@ -137,7 +139,6 @@ Please feel free to contact us for any further questions.
 
 = 2.0.3.1 =
 * Bug fix where WooCommerce checkout would hang.
-
 
 = 2.0.3 =
 * ENHANCEMENT: Integrate with Paid Memberships Pro.
