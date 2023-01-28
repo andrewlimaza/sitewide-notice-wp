@@ -19,7 +19,8 @@ class SiteWide_Notice_WP_Settings{
   public function admin_enqueue_scripts() {
     //enable color wheel
     wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_script( 'wp-color-alpha', plugins_url( '/js/wp-color-picker-alpha.min.js', __FILE__ ), array( 'wp-color-picker' ), '2.1.3', true );
+    wp_enqueue_script( 'wp-color-alpha', plugins_url( '/js/wp-color-picker-alpha.min.js', __FILE__ ), array( 'wp-color-picker' ), '3.0.2', true );
+    wp_add_inline_script( 'wp-color-alpha', 'jQuery( function() { jQuery( ".color-picker" ).wpColorPicker(); } );' );
   }
 
   /**
@@ -28,7 +29,7 @@ class SiteWide_Notice_WP_Settings{
    * @return void
    */
   public function admin_menu() {
-      add_menu_page( 'Sitewide Notice', 'Sitewide Notice', 'manage_options', 'sitewide-notice-settings', array( $this, 'settings_page_content' ), 'dashicons-megaphone' );
+      add_options_page( 'Sitewide Notice WP', 'Sitewide Notice WP', 'manage_options', 'sitewide-notice-settings', array( $this, 'settings_page_content' ) );
 
   }
 
@@ -89,11 +90,11 @@ class SiteWide_Notice_WP_Settings{
         }
 
         if( isset( $_POST['background-color'] ) ){
-          $values['background_color'] = $_POST['background-color'];
+          $values['background_color'] = sanitize_text_field( $_POST['background-color'] );
         }
 
         if( isset( $_POST['font-color'] ) ){
-          $values['font_color'] = $_POST['font-color'];
+          $values['font_color'] = sanitize_text_field( $_POST['font-color'] );
         }
 
         if( isset( $_POST['message'] ) ){
@@ -125,7 +126,7 @@ class SiteWide_Notice_WP_Settings{
         }
 
         //update the options stored in WordPress
-        if( update_option( 'swnza_options', $values ) ) {
+        if ( update_option( 'swnza_options', $values ) ) {
             SiteWide_Notice_WP_Settings::admin_notices_success();
         }
       }
@@ -136,84 +137,84 @@ class SiteWide_Notice_WP_Settings{
     <html>
       <body>
         <div class="wrap">
-          <h1 align="left"><?php _e('Sitewide Notice WP' , 'sitewide-notice-wp'); ?></h1> <hr/>
+          <h1 align="left"><?php esc_html_e('Sitewide Notice WP' , 'sitewide-notice-wp'); ?></h1> <hr/>
 
             <form action="" method="POST">
             <table class="form-table">
               <tr valign="top">
                 <th scope="row" width="50%">
-                    <label for="active"><?php _e( 'Show Banner', 'sitewide-notice-wp' ); ?></label>
+                    <label for="active"><?php esc_html_e( 'Show Banner', 'sitewide-notice-wp' ); ?></label>
                 </th>
                 <td width="50%">
-                <input type="checkbox" name="active" <?php if( isset( $values['active'] ) && ! empty( $values['active'] ) ){ echo 'checked'; } ?> />
+                <input type="checkbox" name="active" <?php checked( $values['active'], 1, true ); ?> />
                 </td>
               </tr>
 
               <tr>
                 <th scope="row">
-                <label for="show_on_mobile"><?php _e( 'Display Banner On Mobile Devices', 'sitewide-notice-wp' ); ?></label>
+                <label for="show_on_mobile"><?php esc_html_e( 'Display Banner On Mobile Devices', 'sitewide-notice-wp' ); ?></label>
                 </th>
                 <td>
-                   <input type="checkbox" name="show_on_mobile" <?php if( isset( $values['show_on_mobile'] ) && ! empty( $values['show_on_mobile'] ) ){ echo 'checked'; } ?> />
+                   <input type="checkbox" name="show_on_mobile" <?php checked( $values['show_on_mobile'], 1, true );?> />
                 </td>
               </tr>
 
               <tr>
                 <th scope="row">
-                  <label for="dismissible"><?php _e( 'Show Close Button For Banner', 'sitewide-notice-wp' ); ?></label>
+                  <label for="dismissible"><?php esc_html_e( 'Show Close Button For Banner', 'sitewide-notice-wp' ); ?></label>
                 </th>
-                <td><input type="checkbox" name="dismissible" <?php if( isset( $values['dismissible'] ) && ! empty( $values['dismissible'] ) ) { echo 'checked'; } ?>/></td>
+                <td><input type="checkbox" name="dismissible" <?php checked( $values['dismissible'], 1, true );?>/></td>
               </tr>
 
               <tr>
                 <th scope="row">
-                <label for="hide_for_logged_in"><?php _e( 'Hide Banner For Logged-in Users', 'sitewide-notice-wp' ); ?></label>
+                <label for="hide_for_logged_in"><?php esc_html_e( 'Hide Banner For Logged-in Users', 'sitewide-notice-wp' ); ?></label>
                 </th>
                 <td>
-                   <input type="checkbox" name="hide_for_logged_in" <?php if( isset( $values['hide_for_logged_in'] ) && ! empty( $values['hide_for_logged_in'] ) ){ echo 'checked'; } ?> />
+                   <input type="checkbox" name="hide_for_logged_in" <?php checked( $values['hide_for_logged_in'], 1, true ); ?> />
                 </td>
               </tr>
 
 
               <tr>
                 <th scope="row">
-                  <label for="show_on_top"><?php _e( 'Show Banner On Top Of Screen', 'sitewide-notice-wp' ); ?></label>
+                  <label for="show_on_top"><?php esc_html_e( 'Show Banner On Top Of Screen', 'sitewide-notice-wp' ); ?></label>
                 </th>
-                <td><input type="checkbox" name="show_on_top" <?php if( isset( $values['show_on_top'] ) && ! empty( $values['show_on_top'] ) ) { echo 'checked'; } ?>/></td>
+                <td><input type="checkbox" name="show_on_top" <?php checked( $values['show_on_top'], 1, true ); ?>/></td>
               </tr>
 
               <?php if( defined( 'PMPRO_VERSION' ) ) { ?>
                 <tr>
                   <th scope="row">
-                  <label for="show_for_members"><?php _e( 'Display Banner For PMPro Members', 'sitewide-notice-wp' ); ?></label>
+                  <label for="show_for_members"><?php esc_html_e( 'Display Banner For PMPro Members', 'sitewide-notice-wp' ); ?></label>
                   </th>
                   <td>
-                     <input type="checkbox" name="show_for_members" <?php if( isset( $values['show_for_members'] ) && ! empty( $values['show_for_members'] ) ){ echo 'checked'; } ?> />
+                     <input type="checkbox" name="show_for_members" <?php checked( $values['show_for_members'], 1, true ); ?> />
                   </td>
                 </tr>
               <?php } ?>
 
               <tr>
               <th scope="row">
-                 <label for="background-color"><?php _e( 'Background Color', 'sitewide-notice-wp' ); ?></label>
+                 <label for="background-color"><?php esc_html_e( 'Background Color', 'sitewide-notice-wp' ); ?></label>
               </th>
               <td>
-                 <input type="text" name="background-color" class="color-picker" data-alpha="true" value="<?php echo sanitize_rgba_color( $values['background_color'] ); ?>"/>
+                 <input type="text" name="background-color" class="color-picker" data-alpha-enabled="true"  value="<?php echo esc_attr( $values['background_color'] ); ?>"/>
               </td>
               </tr>
 
              <tr>
               <th scope="row">
-                <label for="font-color"><?php _e( 'Font Color', 'sitewide-notice-wp' ); ?></label>
+                <label for="font-color"><?php esc_html_e( 'Font Color', 'sitewide-notice-wp' ); ?></label>
               </th>
               <td>
-                <input type="text" name="font-color" class="color-picker" data-alpha="true" value="<?php echo sanitize_rgba_color( $values['font_color'] ); ?>"/>
+                <input type="text" name="font-color" class="color-picker" data-alpha-enabled="true" value="<?php echo esc_attr( $values['font_color'] ); ?>"/>
               </td>
               </tr>
 
               <tr>
               <th scope="row">
-                <label for="message" class="col-sm-2 control-label"><?php _e('Message:', 'sitewide-notice-wp'); ?> </label>
+                <label for="message" class="col-sm-2 control-label"><?php esc_html_e('Message:', 'sitewide-notice-wp'); ?> </label>
               </th>
               <td>
                 <textarea name="message" cols="40" rows="5" ><?php echo stripcslashes( sanitize_text_field( $values['message'] ) ); ?></textarea>
@@ -235,11 +236,8 @@ class SiteWide_Notice_WP_Settings{
 
     private static function admin_notices_success() {
       ?>
-    <div class="notice notice-success is-dismissible">
-      <p><strong><?php _e( 'Settings saved.' ,'sitewide-notice-wp' ); ?></strong></p>
-      <button type="button" class="notice-dismiss">
-        <span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'sitewide-notice-wp' ); ?></span>
-      </button>
+    <div class="notice notice-success">
+      <p><strong><?php esc_html_e( 'Settings saved.' ,'sitewide-notice-wp' ); ?></strong></p>
     </div>
     <?php
     }

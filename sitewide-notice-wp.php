@@ -31,7 +31,6 @@ defined( 'ABSPATH' ) or exit;
  * INCLUDES
  */
 include 'sitewide-notice-settings.php'; //all admin code can be found in here.
-include 'includes/functions.php';
 
 class SiteWide_Notice_WP {
 
@@ -102,14 +101,12 @@ class SiteWide_Notice_WP {
                 <!-- SiteWide Notice WP Cookies -->
                 <script type="text/javascript">
                     jQuery(document).ready(function($){
-
-                        if( Cookies.get('swnza_hide_banner_cookie') != undefined ) {
-                            $('.swnza_banner').hide();
+                        if( Cookies.get('swnza_hide_banner_cookie') != 1 ) {
+                            $('.swnza_banner').show();
                         }
 
                         $('#swnza_close_button_link').click(function(){
                         Cookies.set('swnza_hide_banner_cookie', 1, { expires: 1, path: '/' }); //expire the cookie after 24 hours.
-
                         $('.swnza_banner').hide();
                         });
                     });
@@ -182,7 +179,7 @@ class SiteWide_Notice_WP {
                 </style>
                 <?php } ?>
 
-                <div class="swnza_banner" id="swnza_banner_id">
+                <div class="swnza_banner" id="swnza_banner_id" style="display:none;">
                 <p id="swnza_banner_text"><?php echo htmlspecialchars_decode( stripslashes( apply_filters( 'swnza_banner_text', $swnza_options['message'] ) ) ); ?></p>
                 <a id="swnza_close_button_link" class="swnza_close_button"></a>
                 </div>
