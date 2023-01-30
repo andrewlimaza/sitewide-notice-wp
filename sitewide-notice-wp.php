@@ -122,7 +122,7 @@ class SiteWide_Notice_WP {
                         min-height:50px;
                         height:auto;
                         width:100%;
-                        background:<?php echo sanitize_rgba_color( $swnza_options['background_color'] ); ?>;
+                        background:<?php echo esc_attr( $swnza_options['background_color'] ); ?>;
                         padding-top:10px;
                         z-index:999;
                         display:block;
@@ -138,7 +138,7 @@ class SiteWide_Notice_WP {
                     <?php } ?>   
 
                     .swnza_banner p {
-                        color: <?php echo sanitize_rgba_color( $swnza_options['font_color'] ); ?>;
+                        color: <?php echo esc_attr( $swnza_options['font_color'] ); ?>;
                         text-align:center;
                         z-index:1000;
                         font-size:20px;
