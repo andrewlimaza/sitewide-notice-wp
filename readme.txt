@@ -1,10 +1,10 @@
 === Sitewide Notice WP ===
-Contributors: andrewza, travislima, yoohooplugins
+Contributors: andrewza, yoohooplugins
 Donate link: https://yoohooplugins.com
 Tags: sitewide banner, site banner, banner, notice, sitewide notice, popup banner, simple banner, website banner, website notice, site notice, site message, website message bar, website bar message, message bar
 Requires at least: 5.2
 Tested up to: 6.1
-Stable tag: 2.3
+Stable tag: 2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,7 @@ A lightweight plugin that simply adds a small notification bar that allows you t
 == Installation ==
 1. Upload the plugin files to the `/wp-content/plugins/sitewide-notice-wp` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Use the 'Sitewide Notice' link on the dashboard screen to configure the plugin.
+3. Use the 'Settings' > 'Sitewide Notice WP' link on the dashboard screen to configure the plugin.
 4. Toggle 'Plugin Enable/Disable' to display the notice bar.
 
 == Frequently Asked Questions ==
@@ -42,15 +42,15 @@ Yes this plugin is totally free! You may donate to our development via Paypal wh
 
 = Am I able to add html code to the text of the message bar? =
 
-Yes, you are able to add html code to your banner
+Yes, you are able to add basic html code to your banner.
 
-= I need Sitewide Notice to do something specific for my website =
+= Where is Sitewide Notice WP Settings? =
 
-We are open to suggestions and believe our plugin will grow according to our user's demands. We are user driven.
+Navigate to your WordPress dashboard > Settings > Sitewide Notice WP.
 
 = Am I able to add links and other code to the text message? =
 
-Yes, you are able to add code to Sitewide Notice WP
+Yes, you are able to add basic HTML code to Sitewide Notice WP.
 
 = I need to add custom CSS to my banner =
 
@@ -65,55 +65,22 @@ Please feel free to contact us for any further questions.
 2. Sitewide Notice WP - Sitewide Notice WP settings page.
 
 == Upgrade Notice ==
+= 2.4 =
+* Upgrade for general improvements on loading the notification bar.
+
 = 2.3 =
 * Upgrade immediately for SECURITY improvements.
 
 = 2.2 =
 * Please upgrade for new features and general improvements.
 
-= 2.1 =
-* Please upgrade to version 2.1 for security and UI improvements.
-
-= 2.0.4 =
-* Please upgrade to this version for a minor bug fix and improvements.
-
-= 2.0.3.2 =
-* Please upgrade to this version for a minor bug fix.
-
-= 2.0.3.1 =
-* Please upgrade to this version for a minor bug fix.
-
-= 2.0.3 =
-* Please upgrade SiteWide Notice WP for new features.
-
-= 2.0.2 =
-* Please upgrade SiteWide Notice WP for bug fixes, improvements and new features.
-
-= 2.0.1 =
-* Please update SiteWide Notice WP for bug fixes, improvements and new features.
-
-= 2.0.0 =
-* Please update SiteWide Notice WP for bug fixes, improvements and new features.
-
-= 1.0.5 =
-* Please update SiteWide Notice WP
-
-= 1.0.4 =
-* Please update SiteWide Notice WP
-
-= 1.0.3 =
-* Please update SiteWide Notice WP
-
-= 1.0.2 =
-* Please update your plugin to support HTML code in the message.
-
-= 1.0.1 =
-* ENHANCEMENT: All text is now translatable.
-
-= 1.0 =
-* Please update your Sitewide Notice WP to the latest version to ensure the plugin runs correctly.
-
 == Changelog ==
+= 2.4 - 2023-01-30 =
+* SECURITY: Improved general sanitization and escaping of the plugin where possible.
+* ENHANCEMENT: Moved the settings to "Settings" > "Sitewide Notice WP".
+* BUG FIX/ENHANCEMENT: Updated library used for WP Color Alpha to support WordPress 5.5+ - Fixes some deprecation warnings.
+* BUG FIX/ENHANCEMENT: Improved logic for how the banner is shown when the user closed the notification. 
+
 = 2.3 =
 * Security: Fixed a potential XSS issue. Added wp_kses to banner message options.
 * Enhancement: Added in filter for frontend banner text `swnza_banner_text`.
