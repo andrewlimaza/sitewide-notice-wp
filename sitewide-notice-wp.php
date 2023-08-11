@@ -3,7 +3,7 @@
  * Plugin Name: Sitewide Notice WP
  * Description: Adds a simple message bar to the front-end of your website.
  * Plugin URI: https://yoohooplugins.com
- * Version: 2.4
+ * Version: 2.4.1
  * Author: Yoohoo Plugins
  * Author URI: https://yoohooplugins.com
  * License: GPL2 or later
@@ -97,21 +97,19 @@ class SiteWide_Notice_WP {
                 return;
             } ?>
 
-            <?php if ( ! empty( $swnza_options['dismissible'] ) ) { ?>
-                <!-- SiteWide Notice WP Cookies -->
-                <script type="text/javascript">
-                    jQuery(document).ready(function($){
-                        if( Cookies.get('swnza_hide_banner_cookie') != 1 ) {
-                            $('.swnza_banner').show();
-                        }
+            <!-- SiteWide Notice WP Cookies -->
+            <script type="text/javascript">
+                jQuery(document).ready(function($){
+                    if( Cookies.get('swnza_hide_banner_cookie') != 1 ) {
+                        $('.swnza_banner').show();
+                    }
 
-                        $('#swnza_close_button_link').click(function(){
-                        Cookies.set('swnza_hide_banner_cookie', 1, { expires: 1, path: '/' }); //expire the cookie after 24 hours.
-                        $('.swnza_banner').hide();
-                        });
+                    $('#swnza_close_button_link').click(function(){
+                    Cookies.set('swnza_hide_banner_cookie', 1, { expires: 1, path: '/' }); //expire the cookie after 24 hours.
+                    $('.swnza_banner').hide();
                     });
-                </script>
-            <?php }?>
+                });
+            </script>
 
           
 
