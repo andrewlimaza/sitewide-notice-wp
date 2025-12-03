@@ -3,7 +3,7 @@
  * Plugin Name: Sitewide Notice WP
  * Description: Adds a simple message bar to the front-end of your website.
  * Plugin URI: https://yoohooplugins.com
- * Version: 2.4.1
+ * Version: 2.4.2
  * Author: Yoohoo Plugins
  * Author URI: https://yoohooplugins.com
  * License: GPL2 or later
@@ -54,27 +54,17 @@ class SiteWide_Notice_WP {
     * Initializes the plugin by setting localization, filters, and administration functions.
     */
     private function __construct() {
-
     } //end of construct
 
 
     private static function hooks() {
         global $pagenow;
 
-        //run this code regardless if the actual banner is activated or not.
-        add_action( 'init', array( 'SiteWide_Notice_WP', 'init' ) );
-
         $swnza_options = get_option( 'swnza_options' );
 
         if ( ( is_array( $swnza_options ) && $swnza_options['active'] ) && !is_admin() && ( $pagenow !== 'wp-login.php' ) ) {
             add_action( 'wp_footer', array( 'SiteWide_Notice_WP', 'display_sitewide_notice_banner' ) );
             add_action( 'wp_enqueue_scripts', array( 'SiteWide_Notice_WP', 'enqueue_scripts' ) );
-        }
-    }
-
-    public static function init() {
-        if( isset( $_REQUEST['remove_swnza_settings'] ) || !empty( $_REQUEST['remove_swnza_settings'] ) ) {
-            delete_option( 'swnza_options' );
         }
     }
 

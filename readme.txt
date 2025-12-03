@@ -3,8 +3,8 @@ Contributors: andrewza, yoohooplugins
 Donate link: https://yoohooplugins.com
 Tags: sitewide banner, site banner, banner, notice, sitewide notice, popup banner, simple banner, website banner, website notice, site notice, site message, website message bar, website bar message, message bar
 Requires at least: 5.2
-Tested up to: 6.3
-Stable tag: 2.4
+Tested up to: 6.9
+Stable tag: 2.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,9 @@ Please feel free to contact us for any further questions.
 2. Sitewide Notice WP - Sitewide Notice WP settings page.
 
 == Upgrade Notice ==
+= 2.4.2 =
+* Upgrade for a minor security improvement to the plugin.
+
 = 2.4 =
 * Upgrade for general improvements on loading the notification bar.
 
@@ -75,6 +78,9 @@ Please feel free to contact us for any further questions.
 * Please upgrade for new features and general improvements.
 
 == Changelog ==
+= 2.4.2 - 2025-12-03 =
+* SECURITY: Fixed a minor issue of unused code that could be exploited to delete options.
+
 = 2.4 - 2023-01-30 =
 * SECURITY: Improved general sanitization and escaping of the plugin where possible.
 * ENHANCEMENT: Moved the settings to "Settings" > "Sitewide Notice WP".
